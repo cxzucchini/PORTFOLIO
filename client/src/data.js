@@ -38,6 +38,14 @@ export const PORTFOLIO_DATA = {
       title: "Coming Soon...",
       desc: "Working on something new. Stay tuned! 🚀",
       isEmpty: true
+    },
+    {
+      num: "Github Repositories",
+      title: "View Projects",
+      desc: "A digital task management solution designed to streamline productivity. Features a structured database and a dynamic user interface for real-time status updates.",
+      tags: ["HTML","CSS Variables","PHP","MongoDB", "Express", "React", "Node.js"],
+      link: "https://github.com/cxzucchini?tab=repositories",
+      isEmpty: false
     }
   ]
 };

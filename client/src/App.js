@@ -3,12 +3,17 @@ import { PORTFOLIO_DATA } from './data';
 import './App.css';
 
 function App() {
-  const [isDarkMode, setIsDarkMode] = useState(true);
+      const [isDarkMode, setIsDarkMode] = useState(() => {
+        const saved = localStorage.getItem('theme');
+       return saved ? saved === 'dark' : true;
+    });
   const { profile, skills, projects } = PORTFOLIO_DATA;
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
-  }, [isDarkMode]);
+      const theme = isDarkMode ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+    }, [isDarkMode]);
 
   const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
@@ -25,8 +30,10 @@ function App() {
             <li><a href="#projects">Projects</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
-          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-            {isDarkMode ? <span className="icon-sun">☀️</span> : <span className="icon-moon">🌙</span>}
+          <button className={`theme-toggle-pill ${isDarkMode ? 'dark' : 'light'}`} onClick={toggleTheme}>
+             <div className="toggle-thumb">
+              {isDarkMode ? '☀️' : '🌙'}
+              </div>
           </button>
         </div>
       </nav>
@@ -38,7 +45,7 @@ function App() {
             <p className="hero-tag">Hey there! I'm</p>
             <h1>James Laurence <br />Talagon</h1>
             <p className="hero-sub">Frontend Developer &amp; IT Student at <strong>{profile.school}</strong></p>
-            <p className="hero-desc">2nd year BSIT student who loves building clean, fast, and good-looking websites. Currently open to internships and freelance projects.</p>
+            <p className="hero-desc">BSIT Student. I build clean, functional, and efficient digital solutions. Currently open to internships and freelance opportunities.</p>
             <div className="hero-btns">
               <a href="#projects" className="btn btn-primary">See My Work</a>
               <a href="#contact" className="btn btn-ghost">Contact Me</a>
@@ -58,9 +65,10 @@ function App() {
         
         <div className="about-content-top">
           <p>I'm James, a <strong>{profile.year} student</strong> at <strong>{profile.school}.</strong> 
-            I'm a developer who enjoys exploring how things are built and learn.</p>
-          <p>I enjoy the process of turning an idea into something real and usable. I'm still learning every day, and I believe that building real projects is the best way to grow as a developer.</p>
-          <p>When I'm not coding, I'm watching dev tutorials, exploring UI designs, or just enjoying life in Iloilo.</p>
+            I am a BSIT student at the Western Institute of Technology.
+             I am driven by the process of turning complex ideas into functional, real-world solutions.</p>
+          <p>I believe that hands-on building is the most effective way to master technology. Whether it's developing for the web or managing systems,
+             I focus on creating work that is clean, reliable, and user-centered.</p>
         </div>
 
         <div className="about-grid">
